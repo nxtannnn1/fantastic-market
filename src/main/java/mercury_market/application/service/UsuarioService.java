@@ -7,6 +7,7 @@ import mercury_market.api.dto.response.LoginResponse;
 import mercury_market.api.dto.response.UsuarioResponse;
 import mercury_market.api.mapper.LoginMapper;
 import mercury_market.api.mapper.UsuarioMapper;
+import mercury_market.exceptions.UsuarioNaoEncontradoException;
 import mercury_market.infrastructure.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class UsuarioService {
 
     @Transactional
     public UsuarioResponse listarUsuarioPorId(Long id) {
-        var usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário de id " + id + " não encontrado!"));
+        var usuario = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário de id " + id + " não encontrado!"));
         return usuarioMapper.toDTO(usuario);
     }
 

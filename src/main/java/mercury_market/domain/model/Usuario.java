@@ -31,7 +31,7 @@ public class Usuario {
     @Column(name = "senha_usuario",
             nullable = false)
     @NotBlank(message = "Senha não pode ser vazio")
-    @Size(min = 8, max = 20, message = "Senha deve ter entre 8 e 20 caracteres")
+    @Size(min = 8, message = "Senha deve ter entre 8 e 20 caracteres")
     private String senha;
 
     @Column(name = "tipo_usuario",
