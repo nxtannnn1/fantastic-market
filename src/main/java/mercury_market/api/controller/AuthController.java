@@ -1,10 +1,10 @@
 package mercury_market.api.controller;
 
 import jakarta.validation.Valid;
+import mercury_market.api.dto.request.CadastroRequest;
 import mercury_market.api.dto.request.LoginRequest;
-import mercury_market.api.dto.request.UsuarioRequest;
+import mercury_market.api.dto.response.CadastroResponse;
 import mercury_market.api.dto.response.LoginResponse;
-import mercury_market.api.dto.response.UsuarioResponse;
 import mercury_market.application.service.AuthService;
 import mercury_market.application.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -16,18 +16,16 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class AuthController {
 
-    private final UsuarioService usuarioService;
     private final AuthService authService;
 
-    public AuthController(UsuarioService usuarioService, AuthService authService) {
-        this.usuarioService = usuarioService;
+    public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
     // CADASTRO
     @PostMapping("/cadastro")
-    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest dto) {
-        var usuario = usuarioService.cadastrarUsuario(dto);
+    public ResponseEntity<CadastroResponse> cadastrar(@RequestBody @Valid CadastroRequest dto) {
+        var usuario = authService.autenticarCadastro(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
