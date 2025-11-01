@@ -16,6 +16,8 @@ public class ProdutoResponse {
 
     private Integer quantidade;
 
+    private String descricao;
+
     private String marca;
 
     private Categoria categoria;

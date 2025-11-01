@@ -25,6 +25,8 @@ public class ProdutoRequest {
     @Min(value = 0, message = "Quantidade não pode ser inferior a zero")
     private Integer quantidade;
 
+    private String descricao;
+
     private String marca;
 
     @NotNull(message = "Categoria não pode ser nula")

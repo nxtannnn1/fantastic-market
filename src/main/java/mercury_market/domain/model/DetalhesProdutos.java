@@ -46,6 +46,9 @@ public class DetalhesProdutos {
             nullable = false)
     private Categoria categoria;
 
+    @Column(name = "descricao_produto")
+    private String descricao;
+
     @Column(name = "url_imagem")
     private String urlImagem;
 }

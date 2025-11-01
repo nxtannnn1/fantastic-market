@@ -13,6 +13,7 @@ public interface ProdutoMapper {
 
     @Mapping(source = "detalhesProdutos.nome", target = "nome")
     @Mapping(source = "detalhesProdutos.preco", target = "preco")
+    @Mapping(source = "detalhesProdutos.descricao", target = "descricao")
     @Mapping(source = "detalhesProdutos.quantidade", target = "quantidade")
     @Mapping(source = "detalhesProdutos.marca", target = "marca")
     @Mapping(source = "detalhesProdutos.categoria", target = "categoria")
@@ -22,6 +23,7 @@ public interface ProdutoMapper {
     @Mapping(target = "id", ignore = true) // 👈 ignora o id gerado
     @Mapping(source = "nome", target = "detalhesProdutos.nome")
     @Mapping(source = "preco", target = "detalhesProdutos.preco")
+    @Mapping(source = "descricao", target = "detalhesProdutos.descricao")
     @Mapping(source = "quantidade", target = "detalhesProdutos.quantidade")
     @Mapping(source = "marca", target = "detalhesProdutos.marca")
     @Mapping(source = "categoria", target = "detalhesProdutos.categoria")

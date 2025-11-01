@@ -6,7 +6,6 @@ import mercury_market.api.dto.request.LoginRequest;
 import mercury_market.api.dto.response.CadastroResponse;
 import mercury_market.api.dto.response.LoginResponse;
 import mercury_market.application.service.AuthService;
-import mercury_market.application.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 public class Produto {
@@ -15,4 +18,7 @@ public class Produto {
     @Embedded
     @NotNull(message = "Detalhes não devem ser nulos")
     private DetalhesProdutos detalhesProdutos;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
 }
