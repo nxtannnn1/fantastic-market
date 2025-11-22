@@ -4,33 +4,35 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 import mercury_market.domain.enums.Categoria;
+import mercury_market.domain.model.Avaliacao;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Getter
-@Setter
-public class ProdutoRequest {
+public record ProdutoRequest(
 
-    @NotBlank(message = "Nome do produto não pode ser vazio")
-    private String nome;
+        @NotBlank(message = "Nome do produto não pode ser vazio")
+        String nome,
 
-    @NotNull(message = "Preço do produto não pode ser nulo")
-    @DecimalMin(value = "0.1", message = "Preço mínimo é R$ 0,10")
-    private BigDecimal preco;
+        @NotNull(message = "Preço do produto não pode ser nulo")
+        @DecimalMin(value = "0.1", message = "Preço mínimo é R$ 0,10")
+        BigDecimal preco,
 
-    @NotNull(message = "Quantidade do produto não pode ser nula")
-    @Min(value = 0, message = "Quantidade não pode ser inferior a zero")
-    private Integer quantidade;
+        @NotNull(message = "Quantidade do produto não pode ser nula")
+        @Min(value = 0, message = "Quantidade não pode ser inferior a zero")
+        Integer quantidade,
 
-    private String descricao;
+        String descricao,
 
-    private String marca;
+        String marca,
 
-    @NotNull(message = "Categoria não pode ser nula")
-    private Categoria categoria;
+        @NotNull(message = "Categoria não pode ser nula")
+        Categoria categoria,
 
-    private String urlImagem;
+        String urlImagem,
+
+        List<Avaliacao> avaliacoes
+) {
+
 }

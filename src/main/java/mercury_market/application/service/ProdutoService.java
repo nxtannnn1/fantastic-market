@@ -1,6 +1,7 @@
 package mercury_market.application.service;
 
 import jakarta.transaction.Transactional;
+import mercury_market.api.dto.request.ProdutoFiltroRequest;
 import mercury_market.api.dto.request.ProdutoRequest;
 import mercury_market.api.dto.response.ProdutoResponse;
 import mercury_market.api.mapper.ProdutoMapper;
@@ -55,24 +56,24 @@ public class ProdutoService {
     }
 
     @Transactional
-    public Page<ProdutoResponse> filtrarProdutos(ProdutoRequest dto, Pageable pageable) {
+    public Page<ProdutoResponse> filtrarProdutos(ProdutoFiltroRequest dto, Pageable pageable) {
 
         Page<Produto> produtos;
 
-        if (dto.getNome() != null && dto.getCategoria() != null) {
-            produtos = produtoRepository.findByDetalhesProdutosNomeContainingIgnoreCaseAndDetalhesProdutosCategoria(dto.getNome(), dto.getCategoria(), pageable);
+        if (dto.nome() != null && dto.categoria() != null) {
+            produtos = produtoRepository.findByDetalhesProdutosNomeContainingIgnoreCaseAndDetalhesProdutosCategoria(dto.nome(), dto.categoria(), pageable);
         }
 
         // Filtrar por categoria
-        else if (dto.getCategoria() != null) {
+        else if (dto.categoria() != null) {
             produtos = produtoRepository.findByDetalhesProdutosCategoria(
-                    dto.getCategoria(), pageable);
+                    dto.categoria(), pageable);
         }
 
         // Filtrar por nome parcial
-        else if (dto.getNome() != null) {
+        else if (dto.nome() != null) {
             produtos = produtoRepository.findByDetalhesProdutosNomeContainingIgnoreCase(
-                    dto.getNome(), pageable);
+                    dto.nome(), pageable);
         }
 
         //Filtrar por nome e categoria
@@ -86,11 +87,11 @@ public class ProdutoService {
 
     public void atualizarDetalhes(DetalhesProdutos detalhes, ProdutoRequest dto) {
 
-        if (dto.getNome() != null) detalhes.setNome(dto.getNome());
-        if (dto.getPreco() != null) detalhes.setPreco(dto.getPreco());
-        if (dto.getQuantidade() != null) detalhes.setQuantidade(dto.getQuantidade());
-        if (dto.getMarca() != null) detalhes.setMarca(dto.getMarca());
-        if (dto.getCategoria() != null) detalhes.setCategoria(dto.getCategoria());
-        if (dto.getUrlImagem() != null) detalhes.setUrlImagem(dto.getUrlImagem());
+        if (dto.nome() != null) detalhes.setNome(dto.nome());
+        if (dto.preco() != null) detalhes.setPreco(dto.preco());
+        if (dto.quantidade() != null) detalhes.setQuantidade(dto.quantidade());
+        if (dto.marca() != null) detalhes.setMarca(dto.marca());
+        if (dto.categoria() != null) detalhes.setCategoria(dto.categoria());
+        if (dto.urlImagem() != null) detalhes.setUrlImagem(dto.urlImagem());
     }
 }

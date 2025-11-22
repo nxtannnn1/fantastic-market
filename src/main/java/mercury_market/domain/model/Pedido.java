@@ -18,12 +18,14 @@ public class Pedido {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itens = new ArrayList<>();
 
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pagamento_id")
     private Pagamento pagamento;
 
     private LocalDateTime dataCriacao = LocalDateTime.now();

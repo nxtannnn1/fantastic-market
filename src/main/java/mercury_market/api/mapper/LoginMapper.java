@@ -9,10 +9,12 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface LoginMapper {
 
-    LoginResponse toDTO(Usuario usuario);
+    @Mapping(target = "token", source = "token")
+    LoginResponse toDTO(Usuario usuario, String token);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "nome", ignore = true)
     @Mapping(target = "tipoUsuario", ignore = true)
+        //@Mapping(target = "token", ignore = true)
     Usuario toEntity(LoginRequest loginRequest);
 }

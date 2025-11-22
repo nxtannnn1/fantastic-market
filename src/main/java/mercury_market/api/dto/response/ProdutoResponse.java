@@ -1,26 +1,20 @@
 package mercury_market.api.dto.response;
 
-import lombok.Data;
 import mercury_market.domain.enums.Categoria;
+import mercury_market.domain.model.Avaliacao;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Data
-public class ProdutoResponse {
+public record ProdutoResponse(Long id,
+                              String nome,
+                              BigDecimal preco,
+                              Integer quantidade,
+                              String descricao,
+                              String marca,
+                              Categoria categoria,
+                              String urlImagem,
+                              List<Avaliacao> avaliacoes) {
 
-    private Long id;
-
-    private String nome;
-
-    private BigDecimal preco;
-
-    private Integer quantidade;
-
-    private String descricao;
-
-    private String marca;
-
-    private Categoria categoria;
-
-    private String urlImagem;
 }
+

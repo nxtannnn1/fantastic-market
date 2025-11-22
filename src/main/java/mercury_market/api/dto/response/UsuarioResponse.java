@@ -1,13 +1,12 @@
 package mercury_market.api.dto.response;
 
-import lombok.Data;
 import mercury_market.domain.enums.TipoUsuario;
 
-@Data
-public class UsuarioResponse {
+public record UsuarioResponse(
+        Long id,
+        String nome,
+        String email,
+        TipoUsuario tipoUsuario
+) {
 
-    private Long id;
-    private String nome;
-    private String email;
-    private TipoUsuario tipoUsuario;
 }

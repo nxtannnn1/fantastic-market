@@ -1,6 +1,5 @@
 package mercury_market.application.service;
 
-import jakarta.annotation.PostConstruct;
 import mercury_market.api.dto.request.CadastroRequest;
 import mercury_market.api.dto.request.LoginRequest;
 import mercury_market.api.dto.response.CadastroResponse;
@@ -25,72 +24,43 @@ public class AuthService {
     private final CadastroMapper cadastroMapper;
     private final PasswordEncoder passwordEncoder;
     private final SenhaValidator senhaValidator;
+    private final JwtService jwtService;
 
     public AuthService(UsuarioRepository usuarioRepository,
                        CadastroMapper cadastroMapper,
                        LoginMapper loginMapper,
                        PasswordEncoder passwordEncoder,
-                       SenhaValidator senhaValidator) {
+                       SenhaValidator senhaValidator,
+                       JwtService jwtService) {
         this.usuarioRepository = usuarioRepository;
         this.loginMapper = loginMapper;
         this.cadastroMapper = cadastroMapper;
         this.passwordEncoder = passwordEncoder;
         this.senhaValidator = senhaValidator;
-    }
-
-    @PostConstruct
-    public void criarUsuariosPadrao() {
-        var adminEmail = "admin@mm.com";
-        var clienteEmail = "cliente@mm.com";
-        var vendedorEmail = "vendedor@mm.com";
-
-        if (usuarioRepository.findByEmail(adminEmail).isEmpty()) {
-            var admin = new Usuario();
-            admin.setNome("Admin");
-            admin.setEmail(adminEmail);
-            admin.setSenha(passwordEncoder.encode("Admin123!"));
-            admin.setTipoUsuario(TipoUsuario.ADM);
-            usuarioRepository.save(admin);
-        }
-
-        if (usuarioRepository.findByEmail(clienteEmail).isEmpty()) {
-            var cliente = new Usuario();
-            cliente.setNome("Cliente");
-            cliente.setEmail(clienteEmail);
-            cliente.setSenha(passwordEncoder.encode("Cliente123!"));
-            cliente.setTipoUsuario(TipoUsuario.CLIENTE);
-            usuarioRepository.save(cliente);
-        }
-
-        if (usuarioRepository.findByEmail(vendedorEmail).isEmpty()) {
-            var vendedor = new Usuario();
-            vendedor.setNome("Vendedor");
-            vendedor.setEmail(vendedorEmail);
-            vendedor.setSenha(passwordEncoder.encode("Vendedor123!"));
-            vendedor.setTipoUsuario(TipoUsuario.VENDEDOR);
-            usuarioRepository.save(vendedor);
-        }
+        this.jwtService = jwtService;
     }
 
     public LoginResponse autenticarLogin(LoginRequest loginRequest) {
-        var usuario = usuarioRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new EmailNaoEncontradoException("Não foi encontrado um usuário com esse email"));
-        if (!passwordEncoder.matches(loginRequest.getSenha(), usuario.getSenha()))
-            throw new SenhaInvalidaException("Senha incorreta");
-        return loginMapper.toDTO(usuario);
+        var usuario = usuarioRepository.findByEmail(loginRequest.email()).orElseThrow(() -> new EmailNaoEncontradoException("Credenciais inválidas!"));
+        if (!passwordEncoder.matches(loginRequest.senha(), usuario.getSenha()))
+            throw new SenhaInvalidaException("Credenciais inválidas!");
+
+        String token = jwtService.gerarToken(usuario.getEmail());
+        return loginMapper.toDTO(usuario, token);
     }
 
     public CadastroResponse autenticarCadastro(CadastroRequest cadastroRequest) {
-        if (usuarioRepository.existsByEmail(cadastroRequest.getEmail()))
-            throw new EmailJaCadastradoException("Já existe um usuário com esse email");
+        if (usuarioRepository.existsByEmail(cadastroRequest.email()))
+            throw new EmailJaCadastradoException("Credenciais inválidas!");
 
         var usuario = new Usuario();
 
-        usuario.setNome(cadastroRequest.getNome());
-        usuario.setEmail(cadastroRequest.getEmail());
+        usuario.setNome(cadastroRequest.nome());
+        usuario.setEmail(cadastroRequest.email());
 
-        senhaValidator.validar(cadastroRequest.getSenha());
+        senhaValidator.validar(cadastroRequest.senha());
 
-        usuario.setSenha(passwordEncoder.encode(cadastroRequest.getSenha()));
+        usuario.setSenha(passwordEncoder.encode(cadastroRequest.senha()));
         usuario.setTipoUsuario(TipoUsuario.CLIENTE);
 
         usuarioRepository.save(usuario);

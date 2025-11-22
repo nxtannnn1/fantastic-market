@@ -1,6 +1,7 @@
 package mercury_market.api.controller;
 
 import jakarta.validation.Valid;
+import mercury_market.api.dto.request.ProdutoFiltroRequest;
 import mercury_market.api.dto.request.ProdutoRequest;
 import mercury_market.api.dto.response.ProdutoResponse;
 import mercury_market.application.service.ProdutoService;
@@ -36,9 +37,7 @@ public class ProdutoController {
     public ResponseEntity<Page<ProdutoResponse>> filtrarProdutos(@RequestParam(required = false) String nome,
                                                                  @RequestParam(required = false) Categoria categoria,
                                                                  Pageable pageable) {
-        ProdutoRequest dto = new ProdutoRequest();
-        dto.setNome(nome);
-        dto.setCategoria(categoria);
+        ProdutoFiltroRequest dto = new ProdutoFiltroRequest(nome, categoria);
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.filtrarProdutos(dto, pageable));
     }
 

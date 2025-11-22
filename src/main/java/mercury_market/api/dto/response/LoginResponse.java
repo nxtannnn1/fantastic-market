@@ -1,8 +1,7 @@
 package mercury_market.api.dto.response;
 
-import lombok.Data;
-
-@Data
-public class LoginResponse {
-    private String email;
+public record LoginResponse(
+        String email,
+        String nome,
+        String token) {
 }

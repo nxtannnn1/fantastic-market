@@ -1,5 +1,7 @@
 package mercury_market.api.dto.response;
 
-public class CadastroResponse {
+public record CadastroResponse(
+        String email
+) {
 
 }

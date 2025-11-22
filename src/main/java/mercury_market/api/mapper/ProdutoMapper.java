@@ -18,6 +18,7 @@ public interface ProdutoMapper {
     @Mapping(source = "detalhesProdutos.marca", target = "marca")
     @Mapping(source = "detalhesProdutos.categoria", target = "categoria")
     @Mapping(source = "detalhesProdutos.urlImagem", target = "urlImagem")
+    @Mapping(source = "avaliacoes", target = "avaliacoes")
     ProdutoResponse toDTO(Produto produto);
 
     @Mapping(target = "id", ignore = true) // 👈 ignora o id gerado
@@ -28,6 +29,7 @@ public interface ProdutoMapper {
     @Mapping(source = "marca", target = "detalhesProdutos.marca")
     @Mapping(source = "categoria", target = "detalhesProdutos.categoria")
     @Mapping(source = "urlImagem", target = "detalhesProdutos.urlImagem")
+    @Mapping(source = "avaliacoes", target = "avaliacoes")
     Produto toEntity(ProdutoRequest produtoRequest);
 
     List<ProdutoResponse> toDTO(List<Produto> produtos);
