@@ -1,5 +1,8 @@
 package mercury_market.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum StatusPedido {
 
     PENDENTE("Pendente"),
@@ -13,5 +16,6 @@ public enum StatusPedido {
     StatusPedido(String descricao) {
         this.descricao = descricao;
     }
+
 }
 

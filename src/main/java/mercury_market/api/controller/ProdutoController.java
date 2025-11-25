@@ -34,9 +34,10 @@ public class ProdutoController {
     }
 
     @GetMapping("/filtrar")
-    public ResponseEntity<Page<ProdutoResponse>> filtrarProdutos(@RequestParam(required = false) String nome,
-                                                                 @RequestParam(required = false) Categoria categoria,
-                                                                 Pageable pageable) {
+    public ResponseEntity<Page<ProdutoResponse>> filtrarProdutos(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) Categoria categoria,
+            Pageable pageable) {
         ProdutoFiltroRequest dto = new ProdutoFiltroRequest(nome, categoria);
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.filtrarProdutos(dto, pageable));
     }

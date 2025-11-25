@@ -14,9 +14,11 @@ public class ItemPedido {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido; //Muitos itens pertencem a um pedido
 
     @ManyToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
 
     private Integer quantidade;

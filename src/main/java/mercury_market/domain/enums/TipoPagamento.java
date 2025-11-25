@@ -1,5 +1,8 @@
 package mercury_market.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum TipoPagamento {
     CARTAO_CREDITO("Cartão de Crédito"),
     PIX("Pix"),

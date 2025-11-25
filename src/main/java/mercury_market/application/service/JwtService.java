@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -34,6 +35,11 @@ public class JwtService {
                 .setExpiration(expira) //Quando expira
                 .signWith(secretKey, SignatureAlgorithm.HS256) //Assinado conforme algoritmo HS256
                 .compact(); //Estiliza
+    }
+
+    public String obterEmailUsuarioAutenticado(){
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
     }
 
     public String getSubject(String token) {

@@ -31,7 +31,7 @@ public class Pedido {
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    private StatusPedido status;
+    private StatusPedido statusPedido;
 
     private BigDecimal valorTotal;
 
