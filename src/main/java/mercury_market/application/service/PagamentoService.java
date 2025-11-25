@@ -17,8 +17,6 @@ public class PagamentoService {
 
     private final PagamentoRepository pagamentoRepository;
     private final PagamentoMapper pagamentoMapper;
-    private final UsuarioMapper usuarioMapper;
-    private final UsuarioRepository usuarioRepository;
     private final AuthService authService;
     private final PedidoRepository pedidoRepository;
 
@@ -30,10 +28,8 @@ public class PagamentoService {
                             PedidoRepository pedidoRepository
     ) {
         this.pagamentoRepository = pagamentoRepository;
-        this.usuarioRepository = usuarioRepository;
         this.authService = authService;
         this.pedidoRepository = pedidoRepository;
-        this.usuarioMapper = usuarioMapper;
         this.pagamentoMapper = pagamentoMapper;
     }
 
@@ -52,7 +48,6 @@ public class PagamentoService {
             pedido.setPagamento(pagamento);
             pedido.setStatusPedido(StatusPedido.PAGO);
             pedidoRepository.save(pedido);
-
 
             return pagamentoMapper.toDTO(pagamento);
         }

@@ -35,4 +35,13 @@ public class Pedido {
 
     private BigDecimal valorTotal;
 
+    @PrePersist
+    @PreUpdate
+    public void calcularValorTotal() {
+        this.valorTotal = itens.stream()
+                .map(ItemPedido::getSubTotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+
 }

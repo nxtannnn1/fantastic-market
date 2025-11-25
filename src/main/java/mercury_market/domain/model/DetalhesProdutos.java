@@ -12,6 +12,7 @@ import lombok.Data;
 import mercury_market.domain.enums.Categoria;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Embeddable
 @Data
@@ -51,4 +52,12 @@ public class DetalhesProdutos {
 
     @Column(name = "url_imagem")
     private String urlImagem;
+
+    public void setPreco(BigDecimal preco) {
+        if(preco == null || preco.compareTo(BigDecimal.valueOf(0.1)) < 0) {
+            throw new IllegalArgumentException("Preço inválido");
+        }
+        this.preco = preco.setScale(2, RoundingMode.HALF_UP);
+    }
+
 }
