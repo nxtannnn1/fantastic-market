@@ -22,8 +22,6 @@ public class PagamentoService {
 
     public PagamentoService(PagamentoRepository pagamentoRepository,
                             PagamentoMapper pagamentoMapper,
-                            UsuarioMapper usuarioMapper,
-                            UsuarioRepository usuarioRepository,
                             AuthService authService,
                             PedidoRepository pedidoRepository
     ) {
