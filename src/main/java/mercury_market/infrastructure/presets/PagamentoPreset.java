@@ -22,7 +22,7 @@ public class PagamentoPreset {
     @Transactional
     public void criarProdutosPadrao() {
 
-        var cliente = usuarioRepository.findByEmail("cliente@mm.com");
-        var pedido = pedidoRepository.findById();
+     //   var cliente = usuarioRepository.findByEmail("cliente@mm.com");
+     //   var pedido = pedidoRepository.findById();
     }
 }

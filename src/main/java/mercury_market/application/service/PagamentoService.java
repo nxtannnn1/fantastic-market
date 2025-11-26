@@ -10,9 +10,11 @@ import mercury_market.domain.model.Pagamento;
 import mercury_market.infrastructure.repository.PagamentoRepository;
 import mercury_market.infrastructure.repository.PedidoRepository;
 import mercury_market.infrastructure.repository.UsuarioRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Service
 public class PagamentoService {
 
     private final PagamentoRepository pagamentoRepository;

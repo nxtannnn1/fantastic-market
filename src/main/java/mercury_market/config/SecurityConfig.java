@@ -31,16 +31,18 @@ public class SecurityConfig {
                 // Sem sessão (stateless)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // LIBERA GERAL 🔓
+                // Permitir frames da mesma origem (para H2 console, se precisar)
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
+
+                // Autorização geral
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/h2-console/**").permitAll() // liberar H2 console
+                        .requestMatchers("/**").permitAll()            // liberar todo o resto
                 );
 
         return http.build();
     }
 
-    // CORS liberado
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

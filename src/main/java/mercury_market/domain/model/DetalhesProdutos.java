@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import mercury_market.domain.enums.Categoria;
 
 import java.math.BigDecimal;
@@ -16,6 +18,8 @@ import java.math.RoundingMode;
 
 @Embeddable
 @Data
+@Setter
+@Getter
 public class DetalhesProdutos {
 
     @Column(name = "nome_produto",
@@ -59,5 +63,7 @@ public class DetalhesProdutos {
         }
         this.preco = preco.setScale(2, RoundingMode.HALF_UP);
     }
+
+
 
 }
