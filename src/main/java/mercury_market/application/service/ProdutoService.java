@@ -26,8 +26,7 @@ public class ProdutoService {
 
     @Transactional
     public ProdutoResponse cadastrarProduto(ProdutoRequest dto) {
-        var produto = produtoMapper.toEntity(dto);
-        return produtoMapper.toDTO(produtoRepository.save(produto));
+        return produtoMapper.toDTO(produtoRepository.save(produtoMapper.toEntity(dto)));
     }
 
     @Transactional
@@ -36,20 +35,16 @@ public class ProdutoService {
     }
 
     public ProdutoResponse listarProdutoPorId(Long id) {
-        var produto = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto de id " + id + " não encontrado!"));
-        return produtoMapper.toDTO(produto);
+        return produtoMapper.toDTO(produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto de id " + id + " não encontrado!")));
     }
 
     @Transactional
     public void excluirProdutoPorId(Long id) {
-        if (id == null) throw new IllegalArgumentException("ID não pode ser nulo");
-        var produto = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto de ID " + id + " não encontrado no sistema!"));
-        produtoRepository.delete(produto);
+        produtoRepository.delete(produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto de ID " + id + " não encontrado no sistema!")));
     }
 
     @Transactional
     public ProdutoResponse atualizarProduto(Long id, ProdutoRequest dto) {
-        if (id == null) throw new IllegalArgumentException("ID não pode ser nulo");
         var produto = produtoRepository.findById(id).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto de ID " + id + " não encontrado no sistema!"));
         atualizarDetalhes(produto.getDetalhesProdutos(), dto);
         return produtoMapper.toDTO(produtoRepository.save(produto));

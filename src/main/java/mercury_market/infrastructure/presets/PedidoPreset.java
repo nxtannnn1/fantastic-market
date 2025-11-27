@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import mercury_market.domain.enums.StatusPedido;
 import mercury_market.domain.model.ItemPedido;
 import mercury_market.domain.model.Pedido;
+import mercury_market.exceptions.ProdutoNaoEncontradoException;
 import mercury_market.exceptions.UsuarioNaoEncontradoException;
 import mercury_market.infrastructure.repository.PedidoRepository;
 import mercury_market.infrastructure.repository.ProdutoRepository;
@@ -33,7 +34,7 @@ public class PedidoPreset {
         if (pedidoRepository.count() == 0) {
 
             var usuario = usuarioRepository.findById(1L).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!"));
-            var produto = produtoRepository.findById(1L).orElseThrow(() -> new UsuarioNaoEncontradoException("Produto não encontrado!"));
+            var produto = produtoRepository.findById(1L).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado!"));
 
             //Criação do pedido
 

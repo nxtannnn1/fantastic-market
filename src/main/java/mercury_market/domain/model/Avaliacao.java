@@ -28,7 +28,7 @@ public class Avaliacao {
 
     @Min(1)
     @Max(5)
-    private int nota; // 1 a 5
+    private Integer nota; // 1 a 5
     private String comentario;
 
     private LocalDateTime dataCriacao = LocalDateTime.now();

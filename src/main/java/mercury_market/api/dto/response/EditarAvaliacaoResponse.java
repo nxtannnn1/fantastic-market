@@ -2,12 +2,13 @@ package mercury_market.api.dto.response;
 
 import java.time.LocalDateTime;
 
-public record AvaliacaoResponse(
+public record EditarAvaliacaoResponse (
         Long id,
         Long clienteId,
         Long produtoId,
-        LocalDateTime dataCriacao,
+        Integer nota,
         String comentario,
-        Integer Nota
-) {
+        LocalDateTime dataCriacao
+)
+{
 }
