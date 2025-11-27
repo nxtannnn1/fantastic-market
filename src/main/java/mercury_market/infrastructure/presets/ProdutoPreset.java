@@ -49,7 +49,7 @@ public class ProdutoPreset {
             detalhes.setMarca("Dell");
             detalhes.setCategoria(Categoria.ELETRONICOS);
             detalhes.setDescricao("PC Gamer com Ryzen 5, 16GB RAM, RTX 3060 e SSD NVMe — desempenho sólido para jogos competitivos e multitarefas.");
-            detalhes.setUrlImagem("null");
+            detalhes.setUrlImagem(null);
             produto.setDetalhesProdutos(detalhes);
             avaliacao.setUsuario(usuario);
             avaliacao.setProduto(produto);
@@ -65,7 +65,7 @@ public class ProdutoPreset {
             detalhes2.setMarca("Samsung");
             detalhes2.setCategoria(Categoria.ELETRONICOS);
             detalhes2.setDescricao("Smartphone premium com câmera tripla de 50MP, tela AMOLED 120Hz e processador Snapdragon — ideal para quem exige alto desempenho.");
-            detalhes2.setUrlImagem("null");
+            detalhes2.setUrlImagem(null);
             produto2.setDetalhesProdutos(detalhes2);
             produtoRepository.save(produto2);
 
@@ -75,7 +75,7 @@ public class ProdutoPreset {
             detalhes3.setMarca("Dell");
             detalhes3.setCategoria(Categoria.ELETRONICOS);
             detalhes3.setDescricao("Fone leve e confortável com graves potentes, bateria de até 57 horas e conectividade rápida — perfeito para treinos e trabalho.");
-            detalhes3.setUrlImagem("null");
+            detalhes3.setUrlImagem(null);
             produto3.setDetalhesProdutos(detalhes3);
             produtoRepository.save(produto3);
 

@@ -14,15 +14,20 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleAppExceptions(AppException ex) {
         HttpStatus status;
 
-        if (ex instanceof EmailNaoEncontradoException
+        if (
+                ex instanceof EmailNaoEncontradoException
                 || ex instanceof UsuarioNaoEncontradoException
-                || ex instanceof ProdutoNaoEncontradoException) {
+                || ex instanceof ProdutoNaoEncontradoException
+                || ex instanceof PedidoNaoEncontradoException
+                || ex instanceof AvaliacaoNaoEncontradaException
+        ) {
             status = HttpStatus.NOT_FOUND;
 
         } else if (ex instanceof EmailJaCadastradoException) {
             status = HttpStatus.CONFLICT;
 
         } else if (ex instanceof SenhaInvalidaException
+                || ex instanceof TokenInvalidoException
                 || ex instanceof SenhaIncorretaException) {
             status = HttpStatus.BAD_REQUEST;
 

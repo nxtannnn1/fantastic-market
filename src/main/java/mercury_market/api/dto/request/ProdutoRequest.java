@@ -4,8 +4,8 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import mercury_market.api.dto.response.AvaliacaoResponse;
 import mercury_market.domain.enums.Categoria;
-import mercury_market.domain.model.Avaliacao;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,9 +30,7 @@ public record ProdutoRequest(
         @NotNull(message = "Categoria não pode ser nula")
         Categoria categoria,
 
-        String urlImagem,
-
-        List<Avaliacao> avaliacoes
+        String urlImagem
 ) {
 
 }

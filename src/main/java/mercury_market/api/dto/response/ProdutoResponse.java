@@ -1,5 +1,6 @@
 package mercury_market.api.dto.response;
 
+import mercury_market.api.dto.request.AvaliacaoRequest;
 import mercury_market.domain.enums.Categoria;
 import mercury_market.domain.model.Avaliacao;
 
@@ -14,7 +15,7 @@ public record ProdutoResponse(Long id,
                               String marca,
                               Categoria categoria,
                               String urlImagem,
-                              List<Avaliacao> avaliacoes) {
+                              List<AvaliacaoResponse> avaliacoes) {
 
 }
 
