@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 public record AvaliacaoRequest(
 
         @NotNull
-        Long clienteId,
+        Long usuarioId,
         @NotNull
         Long produtoId,
         @NotNull

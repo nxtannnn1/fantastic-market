@@ -14,7 +14,6 @@ import mercury_market.exceptions.SenhaInvalidaException;
 import mercury_market.exceptions.UsuarioNaoEncontradoException;
 import mercury_market.infrastructure.repository.UsuarioRepository;
 import mercury_market.validation.SenhaValidator;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,9 +50,9 @@ public class AuthService {
         return loginMapper.toDTO(usuario, token);
     }
 
-    public Usuario obterUsuarioAutenticado(){
+    public Usuario obterUsuarioAutenticado() {
         String email = jwtService.obterEmailUsuarioAutenticado();
-        return usuarioRepository.findByEmail(email).orElseThrow (() -> new UsuarioNaoEncontradoException("Teste"));
+        return usuarioRepository.findByEmail(email).orElseThrow(() -> new UsuarioNaoEncontradoException("Teste"));
     }
 
     public CadastroResponse autenticarCadastro(CadastroRequest cadastroRequest) {

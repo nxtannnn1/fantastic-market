@@ -3,6 +3,7 @@ package mercury_market.application.service;
 import mercury_market.api.dto.request.AvaliacaoRequest;
 import mercury_market.api.dto.request.EditarAvaliacaoRequest;
 import mercury_market.api.dto.response.AvaliacaoResponse;
+import mercury_market.api.dto.response.EditarAvaliacaoResponse;
 import mercury_market.api.mapper.AvaliacaoMapper;
 import mercury_market.domain.model.Avaliacao;
 import mercury_market.exceptions.ProdutoNaoEncontradoException;
@@ -33,7 +34,7 @@ public class AvaliacaoService {
 
         Avaliacao avaliacao = new Avaliacao();
 
-        var cliente = usuarioRepository.findById(avaliacaoRequest.clienteId()).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!"));
+        var cliente = usuarioRepository.findById(avaliacaoRequest.usuarioId()).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!"));
         var produto = produtoRepository.findById(avaliacaoRequest.produtoId()).orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado!"));
         avaliacao.setUsuario(cliente);
         avaliacao.setProduto(produto);
@@ -44,13 +45,13 @@ public class AvaliacaoService {
         return avaliacaoMapper.toDTO(avaliacao);
     }
 
-    public AvaliacaoResponse editarAvaliacao(EditarAvaliacaoRequest avaliacaoRequest, Long id) {
+    public EditarAvaliacaoResponse editarAvaliacao(EditarAvaliacaoRequest avaliacaoRequest, Long id) {
 
         var avaliacao = avaliacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Avaliação de ID " + id + " não encontrada"));
         avaliacao.setNota(avaliacaoRequest.nota());
         avaliacao.setComentario(avaliacaoRequest.comentario());
         avaliacaoRepository.save(avaliacao);
-        return avaliacaoMapper.toDTO(avaliacao);
+        return avaliacaoMapper.editToDTO(avaliacao);
     }
 
 }

@@ -20,7 +20,7 @@ public class Pagamento {
 
     @JoinColumn(name = "usuario_id", nullable = false)
     @ManyToOne
-    private Usuario cliente;
+    private Usuario usuario;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "pedido_id", nullable = false, unique = true)

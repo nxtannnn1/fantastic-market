@@ -37,7 +37,7 @@ public class PagamentoService {
         var pedido = pedidoRepository.findById(pagamentoRequest.pedidoId()).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 
         Pagamento pagamento = new Pagamento();
-        pagamento.setCliente(cliente);
+        pagamento.setUsuario(cliente);
         pagamento.setPedido(pedido);
         pagamento.setTipoPagamento(TipoPagamento.valueOf(pagamentoRequest.tipoPagamento().toUpperCase()));
         pagamento.setDataPagamento(LocalDateTime.now());

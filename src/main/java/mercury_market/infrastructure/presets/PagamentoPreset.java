@@ -33,7 +33,7 @@ public class PagamentoPreset {
         Pagamento pagamento = new Pagamento();
         var cliente = usuarioRepository.findByEmail("cliente@mm.com").orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!"));
         var pedido = pedidoRepository.findById(1L).orElseThrow(() -> new RuntimeException("Pedido não encontrado!"));
-        pagamento.setCliente(cliente);
+        pagamento.setUsuario(cliente);
         pagamento.setPedido(pedido);
         pagamento.setTipoPagamento(TipoPagamento.PIX);
         pagamento.setDataPagamento(LocalDateTime.now());

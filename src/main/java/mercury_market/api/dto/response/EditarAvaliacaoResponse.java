@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record EditarAvaliacaoResponse (
         Long id,
-        Long clienteId,
+        Long usuarioId,
         Long produtoId,
         Integer nota,
         String comentario,

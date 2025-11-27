@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 
 public record AvaliacaoResponse(
         Long id,
-        Long clienteId,
+        Long usuarioId,
         Long produtoId,
         LocalDateTime dataCriacao,
         String comentario,
-        Integer Nota
+        Integer nota
 ) {
 }

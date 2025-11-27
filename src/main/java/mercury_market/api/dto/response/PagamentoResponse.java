@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record PagamentoResponse(
         Long id,
-        Long clienteId,
+        Long usuarioId,
         Long pedidoId,
         String tipoPagamento,
         LocalDateTime dataPagamento

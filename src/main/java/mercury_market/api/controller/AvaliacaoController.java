@@ -2,7 +2,9 @@ package mercury_market.api.controller;
 
 import jakarta.validation.Valid;
 import mercury_market.api.dto.request.AvaliacaoRequest;
+import mercury_market.api.dto.request.EditarAvaliacaoRequest;
 import mercury_market.api.dto.response.AvaliacaoResponse;
+import mercury_market.api.dto.response.EditarAvaliacaoResponse;
 import mercury_market.application.service.AvaliacaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,4 +26,12 @@ public class AvaliacaoController {
         return ResponseEntity.status(HttpStatus.OK).body(avaliacaoService.avaliarProduto(avaliacaoRequest));
 
     }
+
+    @PatchMapping("/editar/{id}")
+    public ResponseEntity<EditarAvaliacaoResponse> editarAvaliacao(@RequestBody @Valid EditarAvaliacaoRequest avaliacaoRequest, @PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(avaliacaoService.editarAvaliacao(avaliacaoRequest, id));
+
+    }
+
+
 }
