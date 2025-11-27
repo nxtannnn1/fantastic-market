@@ -47,7 +47,7 @@ public class PedidoPreset {
 
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setProduto(produto);
-            itemPedido.setQuantidade(1);
+            itemPedido.setQuantidade(3);
             itemPedido.setPrecoUnitario(produto.getDetalhesProdutos().getPreco());
             itemPedido.setPedido(pedido);
 
