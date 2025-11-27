@@ -5,6 +5,7 @@ import mercury_market.domain.enums.Categoria;
 import mercury_market.domain.model.Avaliacao;
 import mercury_market.domain.model.DetalhesProdutos;
 import mercury_market.domain.model.Produto;
+import mercury_market.exceptions.UsuarioNaoEncontradoException;
 import mercury_market.infrastructure.repository.ProdutoRepository;
 import mercury_market.infrastructure.repository.UsuarioRepository;
 import org.springframework.context.annotation.DependsOn;
@@ -28,7 +29,7 @@ public class ProdutoPreset {
     @Transactional
     public void criarProdutosPadrao() {
 
-        var usuario = usuarioRepository.findByEmail("cliente@mm.com").orElseThrow(()-> new RuntimeException("Erro!"));
+        var usuario = usuarioRepository.findByEmail("cliente@mm.com").orElseThrow(()-> new UsuarioNaoEncontradoException("Usuário não encontradoi!"));
 
         var produto = new Produto();
         var detalhes = new DetalhesProdutos();

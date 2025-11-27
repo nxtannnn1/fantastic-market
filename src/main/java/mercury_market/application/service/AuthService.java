@@ -35,8 +35,8 @@ public class AuthService {
                        SenhaValidator senhaValidator,
                        JwtService jwtService) {
         this.usuarioRepository = usuarioRepository;
-        this.loginMapper = loginMapper;
         this.cadastroMapper = cadastroMapper;
+        this.loginMapper = loginMapper;
         this.passwordEncoder = passwordEncoder;
         this.senhaValidator = senhaValidator;
         this.jwtService = jwtService;
