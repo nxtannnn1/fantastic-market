@@ -1,17 +1,16 @@
 package mercury_market.api.controller;
 
+import jakarta.validation.Valid;
 import mercury_market.api.dto.request.PagamentoRequest;
 import mercury_market.api.dto.response.PagamentoResponse;
 import mercury_market.application.service.PagamentoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pagamentos")
-@CrossOrigin("[*]")
+@CrossOrigin(origins = "[*]")
 public class PagamentoController {
 
     private final PagamentoService pagamentoService;
@@ -20,7 +19,8 @@ public class PagamentoController {
         this.pagamentoService=pagamentoService;
     }
 
-    public ResponseEntity<PagamentoResponse> processarPagamento(PagamentoRequest pagamentoRequest ){
+    @PostMapping
+    public ResponseEntity<PagamentoResponse> processarPagamento(@RequestBody @Valid PagamentoRequest pagamentoRequest ){
         var pagamento = pagamentoService.processsarPagamento(pagamentoRequest);
         return ResponseEntity.status(HttpStatus.OK).body(pagamento);
     }

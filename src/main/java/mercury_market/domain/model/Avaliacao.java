@@ -1,6 +1,6 @@
 package mercury_market.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -23,7 +23,7 @@ public class Avaliacao {
 
     @ManyToOne
     @NotNull
-    @JsonIgnore
+    @JsonBackReference
     private Produto produto; //Muitas avaliações pertencem a um produto
 
     @Min(1)

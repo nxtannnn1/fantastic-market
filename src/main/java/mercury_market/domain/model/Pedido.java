@@ -18,22 +18,22 @@ public class Pedido {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_id", nullable=false)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itens = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pagamento_id")
+    @OneToOne(mappedBy = "pedido")
     private Pagamento pagamento;
 
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    private StatusPedido statusPedido;
+    private StatusPedido statusPedido =StatusPedido.PENDENTE;
 
-    private BigDecimal valorTotal;
+    @Column(nullable=false)
+    private BigDecimal valorTotal = BigDecimal.ZERO;
 
     @PrePersist
     @PreUpdate

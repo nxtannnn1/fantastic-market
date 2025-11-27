@@ -1,5 +1,6 @@
 package mercury_market.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ public class Produto {
     @NotNull(message = "Detalhes não devem ser nulos")
     private DetalhesProdutos detalhesProdutos;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Avaliacao> avaliacoes = new ArrayList<>();
 }

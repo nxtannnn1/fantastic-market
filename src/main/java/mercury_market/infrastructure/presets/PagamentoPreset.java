@@ -19,10 +19,10 @@ public class PagamentoPreset {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @Transactional
+  /*  @Transactional
     public void criarProdutosPadrao() {
 
         var cliente = usuarioRepository.findByEmail("cliente@mm.com");
         var pedido = pedidoRepository.findById();
-    }
+    }*/
 }

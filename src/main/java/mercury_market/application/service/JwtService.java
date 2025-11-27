@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import mercury_market.exceptions.TokenInvalidoException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -52,7 +53,7 @@ public class JwtService {
 
             return claims.getSubject();
         } catch (Exception e) {
-            throw new RuntimeException("Token JWT inválido!");
+            throw new TokenInvalidoException("Token JWT inválido!");
         }
     }
 
