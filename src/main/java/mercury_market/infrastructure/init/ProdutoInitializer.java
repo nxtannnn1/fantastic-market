@@ -2,8 +2,10 @@ package mercury_market.infrastructure.init;
 
 import mercury_market.infrastructure.presets.ProdutoPreset;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Order(2)
 @Component
 public class ProdutoInitializer implements CommandLineRunner {
 

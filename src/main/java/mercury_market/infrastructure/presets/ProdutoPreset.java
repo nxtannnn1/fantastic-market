@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@DependsOn("usuarioPreset")
+@DependsOn({"usuarioPreset"})
 @Component
 public class ProdutoPreset {
 

@@ -2,12 +2,16 @@ package mercury_market.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import mercury_market.domain.enums.TipoPagamento;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Getter
+@Setter
 public class Pagamento {
 
     @Id

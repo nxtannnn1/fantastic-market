@@ -8,11 +8,13 @@ import mercury_market.exceptions.UsuarioNaoEncontradoException;
 import mercury_market.infrastructure.repository.PedidoRepository;
 import mercury_market.infrastructure.repository.ProdutoRepository;
 import mercury_market.infrastructure.repository.UsuarioRepository;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
+@DependsOn({"usuarioPreset", "produtoPreset"})
 public class PedidoPreset {
 
     private final UsuarioRepository usuarioRepository;
