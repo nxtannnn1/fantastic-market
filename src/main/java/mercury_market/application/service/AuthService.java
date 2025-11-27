@@ -1,11 +1,14 @@
 package mercury_market.application.service;
 
+import mercury_market.api.dto.request.AlterarEmailUsuarioRequest;
 import mercury_market.api.dto.request.CadastroRequest;
 import mercury_market.api.dto.request.LoginRequest;
+import mercury_market.api.dto.response.AlterarEmailUsuarioResponse;
 import mercury_market.api.dto.response.CadastroResponse;
 import mercury_market.api.dto.response.LoginResponse;
 import mercury_market.api.mapper.CadastroMapper;
 import mercury_market.api.mapper.LoginMapper;
+import mercury_market.api.mapper.UsuarioMapper;
 import mercury_market.domain.enums.TipoUsuario;
 import mercury_market.domain.model.Usuario;
 import mercury_market.exceptions.EmailJaCadastradoException;
@@ -50,11 +53,6 @@ public class AuthService {
         return loginMapper.toDTO(usuario, token);
     }
 
-    public Usuario obterUsuarioAutenticado() {
-        String email = jwtService.obterEmailUsuarioAutenticado();
-        return usuarioRepository.findByEmail(email).orElseThrow(() -> new UsuarioNaoEncontradoException("Teste"));
-    }
-
     public CadastroResponse autenticarCadastro(CadastroRequest cadastroRequest) {
         if (usuarioRepository.existsByEmail(cadastroRequest.email()))
             throw new EmailJaCadastradoException("Credenciais inválidas!");
@@ -71,5 +69,21 @@ public class AuthService {
 
         usuarioRepository.save(usuario);
         return cadastroMapper.toDTO(usuario);
+    }
+
+    public AlterarEmailUsuarioResponse(String emailAntigo, String emailNovo) {
+
+        Usuario usuario = usuarioRepository.findByEmail(emailAntigo).orElseThrow(() -> new EmailNaoEncontradoException("Credenciais inválidas!"));
+
+        if(!usuario.getEmail().equals(emailNovo)){
+            System.out.println("1221");
+        }
+
+            return usuarioMapper.toDTO();
+    }
+
+    public Usuario obterUsuarioAutenticado() {
+        String email = jwtService.obterEmailUsuarioAutenticado();
+        return usuarioRepository.findByEmail(email).orElseThrow(() -> new UsuarioNaoEncontradoException("Teste"));
     }
 }
