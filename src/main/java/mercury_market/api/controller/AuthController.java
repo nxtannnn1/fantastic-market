@@ -32,5 +32,6 @@ public class AuthController {
         var usuario = authService.autenticarLogin(dto);
         return ResponseEntity.ok(usuario);
     }
+
 }
 
