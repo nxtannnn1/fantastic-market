@@ -3,6 +3,7 @@ package mercury_market.application.service;
 import jakarta.transaction.Transactional;
 import mercury_market.api.dto.request.UsuarioRequest;
 import mercury_market.api.dto.response.AlterarEmailUsuarioResponse;
+import mercury_market.api.dto.response.AlterarSenhaUsuarioResponse;
 import mercury_market.api.dto.response.UsuarioResponse;
 import mercury_market.api.mapper.UsuarioMapper;
 import mercury_market.domain.model.Usuario;
@@ -75,8 +76,22 @@ public class UsuarioService {
         usuario.setEmail(emailNovo);
         usuarioRepository.save(usuario);
 
-        return usuarioMapper.editToDTO(usuario);
+        return usuarioMapper.toEmailDTO(usuario);
 
+    }
+
+    @Transactional
+    public AlterarSenhaUsuarioResponse alterarSenha(String email, String senhaAntiga, String senhaNova) {
+
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new EmailNaoEncontradoException("Credenciais inválidas!"));
+
+        if (usuario.getEmail().equals(email) && passwordEncoder.matches(senhaAntiga, usuario.getSenha())) {
+            usuario.setSenha(passwordEncoder.encode(senhaNova));
+        }
+
+        usuarioRepository.save(usuario);
+
+        return usuarioMapper.toSenhaDTO(usuario);
     }
 
 
