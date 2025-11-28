@@ -1,17 +1,16 @@
 package mercury_market.api.dto.request;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public record AlterarSenhaUsuarioRequest(
         @NotBlank
-        @Min(6)
-        @Max(20)
+        @Size(min = 8, max = 20, message = "Senha deve ter entre 8 e 20 caracteres")
         String senhaAntiga,
         @NotBlank
-        @Min(6)
-        @Max(20)
-        String senhaNova
+        @Size(min = 8, max = 20, message = "Senha deve ter entre 8 e 20 caracteres")
+        String senhaNova,
+        @NotBlank
+        String email
 ) {
 }

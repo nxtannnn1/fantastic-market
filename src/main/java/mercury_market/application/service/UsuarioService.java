@@ -9,6 +9,7 @@ import mercury_market.api.mapper.UsuarioMapper;
 import mercury_market.domain.model.Usuario;
 import mercury_market.exceptions.EmailJaCadastradoException;
 import mercury_market.exceptions.EmailNaoEncontradoException;
+import mercury_market.exceptions.SenhaIncorretaException;
 import mercury_market.exceptions.UsuarioNaoEncontradoException;
 import mercury_market.infrastructure.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -85,9 +86,11 @@ public class UsuarioService {
 
         Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new EmailNaoEncontradoException("Credenciais inválidas!"));
 
-        if (usuario.getEmail().equals(email) && passwordEncoder.matches(senhaAntiga, usuario.getSenha())) {
-            usuario.setSenha(passwordEncoder.encode(senhaNova));
+        if (!passwordEncoder.matches(senhaAntiga, usuario.getSenha())) {
+            throw new SenhaIncorretaException("Credenciais inválidas!");
         }
+
+        usuario.setSenha(senhaNova);
 
         usuarioRepository.save(usuario);
 

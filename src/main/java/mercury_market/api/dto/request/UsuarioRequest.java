@@ -16,7 +16,7 @@ public record UsuarioRequest(
         String email,
 
         @NotBlank(message = "Senha não pode ser vazio")
-        @Size(min = 8, max = 20, message = "Senha deve ter entre 8 e 20 caracteres")
+        @Size(min = 8, max=20, message = "Senha deve ter entre 8 e 20 caracteres")
         String senha,
 
         @NotNull(message = "Tipo de usuário não pode ser nulo")

@@ -11,8 +11,8 @@ public class SenhaValidator implements Validator<String> {
 
         if (senha == null) throw new SenhaInvalidaException("Senha não pode ser nula!");
 
-        if (senha.length() < 6 || senha.length() > 20)
-            throw new SenhaInvalidaException("Senha não pode ter menos de 6 ou mais de 20 caracteres!");
+        if (senha.length() < 8 || senha.length() > 20)
+            throw new SenhaInvalidaException("Senha não pode ter menos de 8 ou mais de 20 caracteres!");
         return senha;
     }
 }
