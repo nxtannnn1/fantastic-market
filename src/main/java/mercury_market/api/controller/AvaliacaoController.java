@@ -23,7 +23,7 @@ public class AvaliacaoController {
 
     @PostMapping("/avaliar")
     public ResponseEntity<AvaliacaoResponse> avaliarProduto(@RequestBody @Valid AvaliacaoRequest avaliacaoRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(avaliacaoService.avaliarProduto(avaliacaoRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(avaliacaoService.avaliarProduto(avaliacaoRequest));
 
     }
 
@@ -31,6 +31,11 @@ public class AvaliacaoController {
     public ResponseEntity<EditarAvaliacaoResponse> editarAvaliacao(@RequestBody @Valid EditarAvaliacaoRequest avaliacaoRequest, @PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(avaliacaoService.editarAvaliacao(avaliacaoRequest, id));
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AvaliacaoResponse>listarAvaliacaoPorId(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(avaliacaoService.listarAvaliacaoPorId(id));
     }
 
 

@@ -4,7 +4,6 @@ import mercury_market.api.dto.request.CadastroRequest;
 import mercury_market.api.dto.request.LoginRequest;
 import mercury_market.api.dto.response.CadastroResponse;
 import mercury_market.api.dto.response.LoginResponse;
-import mercury_market.api.dto.response.TokenRecuperacaoResponse;
 import mercury_market.api.mapper.CadastroMapper;
 import mercury_market.api.mapper.LoginMapper;
 import mercury_market.api.mapper.UsuarioMapper;

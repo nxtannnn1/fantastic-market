@@ -6,6 +6,7 @@ import mercury_market.api.dto.response.AvaliacaoResponse;
 import mercury_market.api.dto.response.EditarAvaliacaoResponse;
 import mercury_market.api.mapper.AvaliacaoMapper;
 import mercury_market.domain.model.Avaliacao;
+import mercury_market.exceptions.AvaliacaoNaoEncontradaException;
 import mercury_market.exceptions.ProdutoNaoEncontradoException;
 import mercury_market.exceptions.UsuarioNaoEncontradoException;
 import mercury_market.infrastructure.repository.AvaliacaoRepository;
@@ -47,11 +48,15 @@ public class AvaliacaoService {
 
     public EditarAvaliacaoResponse editarAvaliacao(EditarAvaliacaoRequest avaliacaoRequest, Long id) {
 
-        var avaliacao = avaliacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Avaliação de ID " + id + " não encontrada"));
+        var avaliacao = avaliacaoRepository.findById(id).orElseThrow(() -> new AvaliacaoNaoEncontradaException("Avaliação de ID " + id + " não encontrada"));
         avaliacao.setNota(avaliacaoRequest.nota());
         avaliacao.setComentario(avaliacaoRequest.comentario());
         avaliacaoRepository.save(avaliacao);
         return avaliacaoMapper.editToDTO(avaliacao);
+    }
+
+    public AvaliacaoResponse listarAvaliacaoPorId(Long id) {
+        return avaliacaoMapper.toDTO(avaliacaoRepository.findById(id).orElseThrow(() -> new AvaliacaoNaoEncontradaException("Avaliação de ID " + id + " não encontrada")));
     }
 
 }
