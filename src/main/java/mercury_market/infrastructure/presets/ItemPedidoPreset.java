@@ -1,30 +1,22 @@
 package mercury_market.infrastructure.presets;
 
 import jakarta.transaction.Transactional;
-import mercury_market.api.mapper.ItemPedidoMapper;
 import mercury_market.domain.model.ItemPedido;
 import mercury_market.infrastructure.repository.ItemPedidoRepository;
 import mercury_market.infrastructure.repository.PedidoRepository;
 import mercury_market.infrastructure.repository.ProdutoRepository;
-import mercury_market.infrastructure.repository.UsuarioRepository;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 @Order(5)
 @Component
 public class ItemPedidoPreset {
 
-    private final UsuarioRepository usuarioRepository;
-    private final ItemPedidoMapper itemPedidoMapper;
     private final ItemPedidoRepository itemPedidoRepository;
     private final PedidoRepository pedidoRepository;
     private final ProdutoRepository produtoRepository;
 
-    public ItemPedidoPreset(UsuarioRepository usuarioRepository, ItemPedidoMapper itemPedidoMapper, ItemPedidoRepository itemPedidoRepository, PedidoRepository pedidoRepository, ProdutoRepository produtoRepository) {
-        this.usuarioRepository = usuarioRepository;
-        this.itemPedidoMapper = itemPedidoMapper;
+    public ItemPedidoPreset(ItemPedidoRepository itemPedidoRepository, PedidoRepository pedidoRepository, ProdutoRepository produtoRepository) {
         this.itemPedidoRepository = itemPedidoRepository;
         this.pedidoRepository = pedidoRepository;
         this.produtoRepository = produtoRepository;

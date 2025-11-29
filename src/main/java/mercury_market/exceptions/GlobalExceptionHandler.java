@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
                 || ex instanceof ProdutoNaoEncontradoException
                 || ex instanceof PedidoNaoEncontradoException
                 || ex instanceof AvaliacaoNaoEncontradaException
+                || ex instanceof ItemPedidoNaoEncontradoException
         ) {
             status = HttpStatus.NOT_FOUND;
 

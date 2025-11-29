@@ -3,13 +3,19 @@ package mercury_market.domain.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemPedido {
 
     @Id
@@ -17,11 +23,11 @@ public class ItemPedido {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable=false)
+    @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido; //Muitos itens pertencem a um pedido
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", nullable=false)
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
     @NotNull
