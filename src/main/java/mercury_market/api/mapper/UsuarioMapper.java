@@ -26,4 +26,5 @@ public interface UsuarioMapper {
     @Mapping(source = "email", target = "email")
     @Mapping(target = "mensagem", ignore = true)
     AlterarSenhaUsuarioResponse toSenhaDTO(Usuario usuario);
+
 }

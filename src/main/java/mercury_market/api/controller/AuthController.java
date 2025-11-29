@@ -23,14 +23,12 @@ public class AuthController {
 
     @PostMapping("/cadastro")
     public ResponseEntity<CadastroResponse> cadastrar(@RequestBody @Valid CadastroRequest dto) {
-        var usuario = authService.autenticarCadastro(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.autenticarCadastro(dto));
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest dto) {
-        var usuario = authService.autenticarLogin(dto);
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(authService.autenticarLogin(dto));
     }
 
 }

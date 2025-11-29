@@ -15,13 +15,12 @@ public class PagamentoController {
 
     private final PagamentoService pagamentoService;
 
-    public PagamentoController(PagamentoService pagamentoService){
-        this.pagamentoService=pagamentoService;
+    public PagamentoController(PagamentoService pagamentoService) {
+        this.pagamentoService = pagamentoService;
     }
 
     @PostMapping
-    public ResponseEntity<PagamentoResponse> processarPagamento(@RequestBody @Valid PagamentoRequest pagamentoRequest ){
-        var pagamento = pagamentoService.processarPagamento(pagamentoRequest);
-        return ResponseEntity.status(HttpStatus.OK).body(pagamento);
+    public ResponseEntity<PagamentoResponse> processarPagamento(@RequestBody @Valid PagamentoRequest pagamentoRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(pagamentoService.processarPagamento(pagamentoRequest));
     }
 }
